@@ -10,9 +10,10 @@ namespace PersonManagement
             List<Person> persons = new List<Person>();
 
             Console.WriteLine("Our available commands :");
+            Console.WriteLine("/show-persons");
             Console.WriteLine("/add-new-person");
             Console.WriteLine("/remove-person");
-            Console.WriteLine("/show-persons");
+            Console.WriteLine("/remove-all-persons");
             Console.WriteLine("/exit");
 
             while (true)
@@ -21,7 +22,15 @@ namespace PersonManagement
                 Console.Write("Enter command : ");
                 string command = Console.ReadLine();
 
-                if (command == "/add-new-person")
+                if (command == "/show-persons")
+                {
+                    Console.WriteLine("Persons in database : ");
+                    foreach (Person person in persons)
+                    {
+                        Console.WriteLine(person.GetInfo());
+                    }
+                }
+                else if (command == "/add-new-person")
                 {
                     Console.Write("Please add person's name :");
                     string name = Console.ReadLine();
@@ -53,13 +62,14 @@ namespace PersonManagement
                     }
 
                 }
-                else if (command == "/show-persons")
+                else if (command=="/remove-all-persons")
                 {
-                    Console.WriteLine("Persons in database : ");
-                    foreach (Person person in persons)
+                    for (int i = 0; i < persons.Count; i++)
                     {
-                        Console.WriteLine(person.GetInfo());
+                            persons.RemoveAt(i);                      
                     }
+                    Console.WriteLine("Sucsesed");
+
                 }
                 else if (command == "/exit")
                 {
