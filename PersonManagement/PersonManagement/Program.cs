@@ -107,23 +107,23 @@ namespace PersonManagement
             }
         }
 
-
-
-
-
     }
 
     class Person
     {
+        public static uint currentIdCounter = 1;
+        public uint Id { get;private set; }    
         public string Name { get; set; }
         public string LastName { get; set; }
         public string FIN { get; set; }
 
         public Person(string name, string lastName, string fin)
         {
+            Id=currentIdCounter;
             Name = name;
             LastName = lastName;
             FIN = fin;
+            currentIdCounter++;
         }
 
         public string GetFullName()
@@ -133,7 +133,7 @@ namespace PersonManagement
 
         public string GetInfo()
         {
-            return Name + " " + LastName + " " + FIN;
+            return Name + " " + Id + " " + LastName + " " + FIN;
         }
     }
 }
