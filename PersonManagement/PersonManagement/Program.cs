@@ -5,9 +5,9 @@ namespace PersonManagement
 {
     internal class Program
     {
+         public static List<Person> persons = new List<Person>();
         static void Main(string[] args)
         {
-            List<Person> persons = new List<Person>();
 
             Console.WriteLine("Our available commands :");
             Console.WriteLine("/show-persons");
@@ -25,10 +25,7 @@ namespace PersonManagement
                 if (command == "/show-persons")
                 {
                     Console.WriteLine("Persons in database : ");
-                    foreach (Person person in persons)
-                    {
-                        Console.WriteLine(person.GetInfo());
-                    }
+                    ShowPerson();
                 }
                 else if (command == "/add-new-person")
                 {
@@ -41,34 +38,23 @@ namespace PersonManagement
                     Console.Write("Please add person's FIN code :");
                     string fin = Console.ReadLine();
 
-                    Person person = new Person(name, lastName, fin);
-                    persons.Add(person);
-
-                    Console.WriteLine(person.GetInfo() + " - Added to system.");
+                    AddNewPerson(name, lastName, fin);
 
                 }
                 else if (command == "/remove-person")
                 {
                     Console.Write("To remove person, please enter his/her FIN code : ");
                     string fin = Console.ReadLine();
-                    for (int i = 0; i < persons.Count; i++)
-                    {
-                        if (persons[i].FIN == fin)
-                        {
-                            Console.WriteLine(persons[i].GetInfo());
-                            persons.RemoveAt(i);
-                            Console.WriteLine("Person removed successfully");
-                        }
-                    }
+                    RemovePerson(fin);
 
                 }
                 else if (command=="/remove-all-persons")
                 {
-                    for (int i = 0; i < persons.Count; i++)
+                    for (int i = persons.Count-1; i >=0; i--)
                     {
                             persons.RemoveAt(i);                      
                     }
-                    Console.WriteLine("Sucsesed");
+                    Console.WriteLine("Succeeded");
 
                 }
                 else if (command == "/exit")
@@ -82,7 +68,38 @@ namespace PersonManagement
                     Console.WriteLine();
                 }
             }
+
         }
+        public static void AddNewPerson(string name,string lastName, string fin)
+            {
+                Person person = new Person(name, lastName, fin);
+                persons.Add(person);
+
+                Console.WriteLine(person.GetInfo() + " - Added to system.");
+
+            }
+        public static void ShowPerson()
+        {
+            foreach (Person person in persons)
+            {
+                Console.WriteLine(person.GetInfo());
+            }
+
+        }
+        public static void RemovePerson(string fin)
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                if (persons[i].FIN == fin)
+                {
+                    Console.WriteLine(persons[i].GetInfo());
+                    persons.RemoveAt(i);
+                    Console.WriteLine("Person removed successfully");
+                }
+            }
+        }
+
+
     }
 
     class Person
