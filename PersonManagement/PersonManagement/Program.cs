@@ -27,6 +27,7 @@ namespace PersonManagement
                     Console.WriteLine("Persons in database : ");
                     ShowPerson();
                 }
+
                 else if (command == "/add-new-person")
                 {
                     Console.Write("Please add person's name :");
@@ -41,6 +42,7 @@ namespace PersonManagement
                     AddNewPerson(name, lastName, fin);
 
                 }
+
                 else if (command == "/remove-person")
                 {
                     Console.Write("To remove person, please enter his/her FIN code : ");
@@ -48,20 +50,19 @@ namespace PersonManagement
                     RemovePerson(fin);
 
                 }
+
                 else if (command=="/remove-all-persons")
                 {
-                    for (int i = persons.Count-1; i >=0; i--)
-                    {
-                            persons.RemoveAt(i);                      
-                    }
-                    Console.WriteLine("Succeeded");
+                    RemoveAllPerson();
 
                 }
+
                 else if (command == "/exit")
                 {
                     Console.WriteLine("Thanks for using our application!");
                     break;
                 }
+
                 else
                 {
                     Console.WriteLine("Command not found, please enter command from list!");
@@ -98,6 +99,16 @@ namespace PersonManagement
                 }
             }
         }
+        public static void RemoveAllPerson()
+        {
+            for (int i = persons.Count - 1; i >= 0; i--)
+            {
+                persons.RemoveAt(i);
+            }
+        }
+
+
+
 
 
     }
